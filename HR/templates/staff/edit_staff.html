@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<head>
+    <title>Edit Staff</title>
+    <style>
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .form-row > div {
+            flex-basis: 30%; /* Adjust width of each input field */
+        }
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Staff</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% crispy form %}
+    </form>
+</body>
+{% endblock %}

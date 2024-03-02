@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <title>Staff List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Staff List</h2>
+    <table>
+        <tr>
+            <th>ስም ከነአያት በአማርኛ</th>
+            <th>ስም ከነአያት በእንግሊዘኛ</th>
+            <th>ፆታ</th>
+            <th>የሚሰራበት የከተማ ቀበሌ ስም</th>
+            <th>የጡረታ መለያ ቁጥር</th>
+            <th>የትውልድ ዘመን</th>
+            <th>ብሔር</th>
+            <th>የትምህርት ዓይነት በአማርኛ</th>
+            <th>የትምህርት ደረጃ</th>
+            <th>የቅጥር ዘመን</th>
+            <th>አገልግሎት  ዘመን</th>
+            <th>የጋብቻ ሁኔታ</th>
+            <th>የስራ መደብ መጠሪያ</th>
+            <th>የስራ መደብ ደረጃ</th>
+            <th>ደመወዝ</th>
+            <th>የቅጥር ሁኔታ</th>
+            <th>Actions</th>
+        </tr>
+        {% for staff in page_obj %}
+        <tr>
+            <td>{{ staff.full_name_amh }}</td>
+            <td>{{ staff.full_name_eng }}</td>
+            <td>{{ staff.gender }}</td>
+            <td>{{ staff.place_of_work }}</td>
+            <td>{{ staff.pension_id_no }}</td>
+            <td>{{ staff.date_of_birth }}</td>
+            <td>{{ staff.ethnicity }}</td>
+            <td>{{ staff.edu_type }}</td>
+            <td>{{ staff.edu_level }}</td>
+            <td>{{ staff.hired_year }}</td>
+            <td>{{ staff.years_of_service }}</td>
+            <td>{{ staff.marital_status }}</td>
+            <td>{{ staff.position }}</td>
+            <td>{{ staff.position_grade }}</td>
+            <td>{{ staff.salary }}</td>
+            <td>{{ staff.hire_type }}</td>
+            <!-- Add other fields as needed -->
+            <td>
+                <a href="{% url 'edit_staff' staff.pk %}">Edit</a> |
+                <a href="{% url 'delete_staff' staff.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+{% endblock %}
