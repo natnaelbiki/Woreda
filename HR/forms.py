@@ -4,6 +4,10 @@ from crispy_forms.layout import Layout, Row, Column, Submit
 from .models import Staff
 from bootstrap_datepicker_plus.widgets import DatePickerInput
 
+
+class StaffFilterForm(forms.Form):
+    pass
+
 class StaffForm(forms.ModelForm):
     class Meta:
         model = Staff
