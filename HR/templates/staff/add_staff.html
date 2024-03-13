@@ -1,12 +1,15 @@
 
 {% extends 'base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
-
 {% block content %}
 <head>
     <title>Add Staff</title>
-    <style>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+     <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Include Bootstrap JS -->
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+ <style>
         .form-row {
             display: flex;
             justify-content: space-between;
@@ -21,10 +24,12 @@
     </style>
 </head>
 <body>
+    {{ form.media }}
     <h2>Add Staff</h2>
     <form method="post">
         {% csrf_token %}
         {% crispy form %}
     </form>
+   
 </body>
 {% endblock %}

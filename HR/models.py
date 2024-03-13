@@ -27,7 +27,7 @@ class Staff(models.Model):
 
 	full_name_amh = models.CharField(max_length=40)
 	full_name_eng = models.CharField(max_length=30)
-	gender = models.CharField(max_length=4, choices=Gender.choices, default=Gender.MALE)
+	gender = models.CharField(max_length=4, choices=Gender.choices)
 	place_of_work = models.CharField(max_length=15)
 	pension_id_no = models.CharField(max_length=25, blank=True)
 	date_of_birth = models.DateField()
@@ -36,11 +36,11 @@ class Staff(models.Model):
 	edu_level = models.CharField(max_length=25, blank=True)
 	hired_year = models.DateField()
 	years_of_service = models.CharField(max_length=25)
-	marital_status = models.CharField(max_length=25, choices=Marital_Status, default=Marital_Status.Unmarried_Men)
+	marital_status = models.CharField(max_length=25, choices=Marital_Status)
 	position = models.CharField(max_length=55)
 	position_grade = models.CharField(max_length=6)
 	salary = models.DecimalField(max_digits=10, decimal_places=2)
-	hire_type = models.CharField(max_length=6, choices=Hire_Type, default=Hire_Type.Contractual)
+	hire_type = models.CharField(max_length=6, choices=Hire_Type)
     
 
 	def __str__(self):

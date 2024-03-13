@@ -71,14 +71,16 @@
     </style>
 </head>
 <body>
-
+{% if user.is_authenticated %}
 <div class="navbar">
     <div class="navbar-logo">
-        <a href="{% url 'staff_list' %}" style="color: white; text-decoration: none;">Home</a>
+        <a href="{% url 'home' %}" style="color: white; text-decoration: none;">Home</a>
     </div>
     <div class="nav-menu">
+        <div class="nav-item"><a href="{% url 'staff_list' %}" style="color: white; text-decoration: none;">staff List</a></div>
         <div class="nav-item"><a href="{% url 'add_staff' %}" style="color: white; text-decoration: none;">Add new staff</a></div>
-        <div class="nav-item">          
+        <div class="nav-item"> 
+        <a style="color: white; text-decoration: none;" href="{% url 'logout' %}">Logout {{ user.username }}</a>         
         </div>
         <div class="nav-item">           
         </div>
@@ -87,6 +89,19 @@
         <div class="nav-item">           
         </div>
     </div>
+
+    {% else %}
+       <div class="nav-item"><a href="{% url 'login' %}" style="color: white; text-decoration: none;">login</a></div>
+      <div class="nav-item">          
+        </div>
+        <div class="nav-item">           
+        </div>
+        <div class="nav-item">          
+        </div>
+        <div class="nav-item">           
+        </div>
+
+    {% endif %}
 </div>
 
 <div class="container">
@@ -94,6 +109,7 @@
     <!-- Page specific content will go here -->
     {% endblock content %}
 </div>
+
 
 </body>
 </html>

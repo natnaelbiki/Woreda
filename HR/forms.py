@@ -2,11 +2,16 @@ from django import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Row, Column, Submit
 from .models import Staff
+from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 class StaffForm(forms.ModelForm):
     class Meta:
         model = Staff
         fields = '__all__'  # Or list specific fields if preferred
+        widgets = {
+            "hired_year": DatePickerInput(),
+            "date_of_birth": DatePickerInput(),
+        }
         labels = {
             'full_name_amh': 'ስም ከነአያት በአማርኛ',
             'full_name_eng': 'ስም ከነአያት በእንግሊዘኛ',
@@ -31,22 +36,26 @@ class StaffForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
-                Column('full_name_amh', css_class='form-group col-md-3 mb-0'),
-                Column('full_name_eng', css_class='form-group col-md-3 mb-0'),
-                Column('gender', css_class='form-group col-md-3 mb-0'),
-                Column('place_of_work', css_class='form-group col-md-3 mb-0'),
+                Column('full_name_amh', css_class='form-group col-md-4 mb-0'),
+                Column('full_name_eng', css_class='form-group col-md-4 mb-0'),
+                Column('gender', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
             Row(
+                Column('place_of_work', css_class='form-group col-md-3 mb-0'),
                 Column('pension_id_no', css_class='form-group col-md-3 mb-0'),
                 Column('date_of_birth', css_class='form-group col-md-3 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
                 Column('ethnicity', css_class='form-group col-md-3 mb-0'),
                 Column('edu_type', css_class='form-group col-md-3 mb-0'),
+                Column('hired_year', css_class='form-group col-md-3 mb-0'),
                 css_class='form-row'
             ),
             # Repeat the structure above for the rest of your fields
             Row(
-                Column('hired_year', css_class='form-group col-md-3 mb-0'),
+                
                 Column('years_of_service', css_class='form-group col-md-3 mb-0'),
                 Column('marital_status', css_class='form-group col-md-3 mb-0'),
                 Column('edu_level', css_class='form-group col-md-3 mb-0'),
@@ -56,8 +65,12 @@ class StaffForm(forms.ModelForm):
                 Column('position', css_class='form-group col-md-3 mb-0'),
                 Column('position_grade', css_class='form-group col-md-3 mb-0'),
                 Column('salary', css_class='form-group col-md-3 mb-0'),
-                Column('hire_type', css_class='form-group col-md-3 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Submit')
+            Row(
+                Column('hire_type', css_class='form-group col-md-3 mb-0'),
+                Submit('submit', 'Submit'),
+                css_class='form-row'
+            ),
+            
         )
