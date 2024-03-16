@@ -22,24 +22,45 @@ def staff_list(request):
             if queryset.exists():
                 # Create an in-memory Excel file
                 output = io.BytesIO()
-
-                # Create a new workbook and add a worksheet
                 workbook = xlsxwriter.Workbook(output)
                 worksheet = workbook.add_worksheet()
+                header_format = workbook.add_format({'bold': True, 'bg_color': '#F7D2AA', 'border': 1})
+                # Create a format for the data rows
+                data_format = workbook.add_format({'border': 1})
 
+                # Create a new workbook and add a worksheet
+                header_format.set_align('center')
+                worksheet.merge_range('A1:P1', 'Woreda 3 HR Information', header_format)
+                header_format.set_text_wrap()
+                data_format.set_text_wrap()
                 # Define the header row
-                headers = ['ስም ከነአያት በአማርኛ', 'ስም ከነአያት በእንግሊዘኛ', 'ፆታ']  # Replace with your model fields
+                headers = ['ስም ከነአያት በአማርኛ', 'ስም ከነአያት በእንግሊዘኛ', 'ፆታ', 'የሚሰራበት የከተማ ቀበሌ ስም', 'የጡረታ መለያ ቁጥር', 'የትውልድ ዘመን', 'ብሔር', 'የትምህርት ዓይነት በአማርኛ',
+                'የትምህርት ደረጃ', 'የቅጥር ዘመን', 'አገልግሎት  ዘመን', 'የጋብቻ ሁኔታ', 'የስራ መደብ መጠሪያ', 'የስራ መደብ ደረጃ', 'ደመወዝ', 'የቅጥር ሁኔታ']  # Replace with your model fields
 
                 # Write the headers to the worksheet
                 for col, header in enumerate(headers):
-                    worksheet.write(0, col, header)
+                    worksheet.write(1, col, header, header_format)
 
                 # Write the model data to the worksheet
-                for row, obj in enumerate(queryset, start=1):
-                    worksheet.write(row, 0, obj.full_name_amh)
-                    worksheet.write(row, 1, obj.full_name_eng)
-                    worksheet.write(row, 2, obj.gender)
+                for row, obj in enumerate(queryset, start=2):
+                    worksheet.write(row, 0, obj.full_name_amh, data_format)
+                    worksheet.write(row, 1, obj.full_name_eng, data_format)
+                    worksheet.write(row, 2, obj.gender, data_format)
+                    worksheet.write(row, 3, obj.place_of_work, data_format)
+                    worksheet.write(row, 4, obj.pension_id_no, data_format)
+                    worksheet.write(row, 5, obj.date_of_birth, data_format)
+                    worksheet.write(row, 6, obj.ethnicity, data_format)
+                    worksheet.write(row, 7, obj.edu_type, data_format)
+                    worksheet.write(row, 8, obj.edu_level, data_format)
+                    worksheet.write(row, 9, obj.hired_year, data_format)
+                    worksheet.write(row, 10, obj.years_of_service, data_format)
+                    worksheet.write(row, 11, obj.marital_status, data_format)
+                    worksheet.write(row, 12, obj.position, data_format)
+                    worksheet.write(row, 13, obj.position_grade, data_format)
+                    worksheet.write(row, 14, obj.salary, data_format)
+                    worksheet.write(row, 15, obj.hire_type, data_format)
                     # Add more columns as needed
+
 
                 # Close the workbook
                 workbook.close()

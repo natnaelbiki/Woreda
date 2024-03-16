@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+annotated-types = "==0.6.0"
+asgiref = "==3.7.2"
+beautifulsoup4 = "==4.12.3"
+crispy-bootstrap4 = "==2024.1"
+crispy-bootstrap5 = "==2024.2"
+django = "==5.0.3"
+django-bootstrap-datepicker-plus = "==5.0.5"
+django-bootstrap4 = "==24.1"
+django-crispy-forms = "==2.1"
+django-tempus-dominus = "==5.1.2.17"
+numpy = "==1.26.4"
+pandas = "==2.2.1"
+pipdeptree = "==2.16.1"
+pydantic = "==2.6.4"
+pydantic-core = "==2.16.3"
+python-dateutil = "==2.9.0.post0"
+pytz = "==2024.1"
+six = "==1.16.0"
+soupsieve = "==2.5"
+sqlparse = "==0.4.4"
+typing-extensions = "==4.10.0"
+tzdata = "==2024.1"
+xlsxwriter = "==3.2.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
